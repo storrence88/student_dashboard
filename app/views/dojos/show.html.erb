@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1><%= @dojo.branch %></h1>
+        <h3>Address: <%= @dojo.street %></h3>
+        <h3>City: <%= @dojo.city %></h3>
+        <h3>State: <%= @dojo.state %></h3>
+        <br>
+        <h3>Student Roster</h3>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @students.each do |student| %>
+                    <tr>
+                        <td><%= student.first_name %></td>
+                        <td><%= student.last_name %></td>
+                        <td><%= student.email %></td>
+                        <td><a href="/dojos/<%= @dojo.id %>/students/<%= student.id %>">Show</a> | <a href="/dojos/<%= @dojo.id %>/students/<%= student.id %>/edit">Edit</a><form action="/dojos/<%= @dojo.id %>/students/<%= student.id %>" method="post"><input type="hidden" name="_method" value="delete"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><input class="btn btn-outline-danger" type="submit" value="Destroy"></form></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <a href="/dojos">Home</a> | <a href="/dojos/<%= @dojo.id %>/students/new">Add Student</a>
+    </div>
+    
+</body>
+</html>

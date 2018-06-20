@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Dojo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit <%= @dojo.branch %></h1>
+        <form action="/dojos/<%= @dojo.id %>" method="POST">
+            <input type="hidden" name="_method" value="patch">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <table>
+                <tr>
+                    <td align="right">Branch:</td>
+                    <td align="left"><input type="text" name="dojo[branch]" value="<%= @dojo.branch %>"></td>
+                </tr>
+                <tr>
+                    <td align="right">Street:</td>
+                    <td align="left"><input type="text" name="dojo[street]" value="<%= @dojo.street %>"></td>
+                </tr>
+                <tr>
+                    <td align="right">City:</td>
+                    <td align="left"><input type="text" name="dojo[city]" value="<%= @dojo.city %>"></td>
+                </tr>
+                <tr>
+                    <td align="right">State:</td>
+                    <td align="left"><input type="text" name="dojo[state]" value="<%= @dojo.state %>"></td>
+                </tr>
+            </table>
+            <input type="submit" value="Edit Dojo">
+        </form>
+        <% if flash[:errors] %>
+            <% flash[:errors].each do |error| %>
+                <p> <%= error %> </p>
+            <% end %>
+        <% end %>
+        <% if flash[:success] %>
+            <p> <%= flash[:success] %> </p>
+        <% end %>
+        <a href="/dojos">Home</a> | <a href="/dojos/<%= @dojo.id %>">Show</a> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<title>  <%= @this_student.first_name %> <%= @this_student.last_name %>  </title>
+</head>
+<body>
+	<div class="container">
+		<h1> <%= @this_dojo.city %>'s <%= @this_student.first_name %> <%= @this_student.last_name %></h1> 
+		<h4> Email: <%= @this_student.email %> </h4>
+		<h2> <%= @this_student.first_name %>'s Cohort </h2>
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<th> First Name </th>
+				<th> Last Name </th>
+				<th> Email </th>
+			</thead>
+			<tbody>
+			<% @these_students.each do |student| %>
+				<tr>
+					<td> <%= student.first_name %> </td>
+					<td> <%= student.last_name %> </td>
+					<td> <%= student.email %> </td>
+				</tr>
+			<% end %>
+			</tbody>
+		</table>
+		<a href="/dojos"> Home </a> | <a href="/dojos/<%= @this_dojo.id %>">Back</a> | <a href="/dojos/<%= @this_dojo.id %>/students/<%= @this_student.id %>/edit" > Edit <%= @this_student.first_name %></a>
+	</div>
+</body>
+</html>

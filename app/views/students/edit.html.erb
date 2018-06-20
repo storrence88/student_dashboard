@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Dojo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit <%= @this_student.first_name %> <%= @this_student.last_name %> </h1>
+        <form action="/dojos/<%= @this_dojo.id %>/students/<%= @this_student.id %>" method="POST">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="patch">
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" class="form-control" name="first_name" aria-describedby="first_name" value="<%= @this_student.first_name %>">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" name="last_name" value="<%= @this_student.last_name %>">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" value="<%= @this_student.email %>">
+            </div>
+            <div class="form-group">
+                    <label for="branch">Branch</label>
+                    <select class="form-control" name="dojo" id="branch">
+                        <option value="<%= @this_dojo.id %>"><%= @this_dojo.branch %></option>
+                        <% if @all_dojos %>
+                            <% @all_dojos.each do |dojo| %>
+                                <option value="<%= dojo.id %>"><%= dojo.branch %></option>
+                            <% end %>
+                        <% end %>
+                    </select>
+                  </div>
+            <button type="submit" class="btn btn-primary">Update <%= @this_student.first_name %> <%= @this_student.last_name %></button>
+        </form>
+        <% if flash[:errors] %>
+            <% flash[:errors].each do |error| %>
+                <p> <%= error %> </p>
+            <% end %>
+        <% end %>
+        <% if flash[:success] %>
+            <p> <%= flash[:success] %> </p>
+        <% end %>
+        <a href="/dojos">Home</a> | <a href="/dojos/<%= @this_dojo.id %>/students/<%= @this_student.id %>">Back</a>
+    </div>
+</body>
+</html>
+
